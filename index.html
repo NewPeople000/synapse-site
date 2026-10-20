@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SYNAPSE OS — Daily Micro-Learning & Personal Discovery Engine</title>
+    <meta
+      name="description"
+      content="A premium daily learning engine built for personal value, cognitive retention, and continuous skill acquisition."
+    />
+
+    <!-- Modern Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Confetti Canvas for Delight Animations -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Top Sticky Navigation -->
+    <header class="site-header" role="banner">
+      <div class="nav-container">
+        <div class="nav-left">
+          <!-- Brand Logo -->
+          <a
+            href="#"
+            class="brand-logo"
+            id="brandLogoBtn"
+            aria-label="Synapse OS Dashboard"
+          >
+            <div class="brand-icon-wrap">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                ></polygon>
+              </svg>
+            </div>
+            <span>SYNAPSE</span>
+            <span class="brand-tag">DAILY</span>
+          </a>
+
+          <!-- Desktop Navigation Items -->
+          <nav class="nav-links" role="navigation" aria-label="Main Navigation">
+            <button class="nav-item active" data-view="dashboard">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Today</span>
+            </button>
+            <button class="nav-item" data-view="explore">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon
+                  points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+                ></polygon>
+              </svg>
+              <span>Explore</span>
+            </button>
+            <button class="nav-item" data-view="challenges">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+              <span>Challenges</span>
+            </button>
+            <button class="nav-item" data-view="resources">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="8" height="18" x="3" y="3" rx="1"></rect>
+                <path d="m7 3 14 14"></path>
+                <path d="M11 21a2 2 0 0 0 2-2V5"></path>
+              </svg>
+              <span>Toolkits</span>
+            </button>
+            <button class="nav-item" data-view="saved">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                ></path>
+              </svg>
+              <span>Saved</span>
+            </button>
+            <button class="nav-item" data-view="progress">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="12" x2="12" y1="20" y2="10"></line>
+                <line x1="18" x2="18" y1="20" y2="4"></line>
+                <line x1="6" x2="6" y1="20" y2="16"></line>
+              </svg>
+              <span>Progress</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="nav-right">
+          <!-- Global Search Trigger Pill -->
+          <button
+            class="search-trigger-pill"
+            id="globalSearchTrigger"
+            title="Press ⌘K or Ctrl+K to search"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search knowledge...</span>
+            <kbd class="search-shortcut-key">⌘K</kbd>
+          </button>
+
+          <!-- Streak Pill -->
+          <div
+            class="header-stat-pill streak-pill"
+            id="navStreakPill"
+            title="Consecutive learning streak"
+          >
+            <span>🔥</span>
+            <span id="streakCountNav">5</span>
+            <span style="font-size: 0.72rem; opacity: 0.85">Days</span>
+          </div>
+
+          <!-- Knowledge Points Pill -->
+          <div
+            class="header-stat-pill points-pill"
+            id="navPointsPill"
+            title="Knowledge Points earned"
+          >
+            <span>⚡</span>
+            <span id="pointsCountNav">540</span>
+            <span style="font-size: 0.72rem; opacity: 0.85">KP</span>
+          </div>
+
+          <!-- Audio Sound Effects Toggle -->
+          <button
+            class="icon-btn"
+            id="audioToggleBtn"
+            title="Toggle audio feedback"
+            aria-label="Toggle audio effects"
+          >
+            <svg
+              id="audioIconOn"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button
+            class="icon-btn"
+            id="themeToggleBtn"
+            title="Toggle light/dark appearance"
+            aria-label="Toggle theme"
+          >
+            <svg
+              id="themeIconSun"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <!-- User Profile Nav Trigger -->
+          <button
+            class="profile-nav-trigger"
+            id="profileNavBtn"
+            data-view="profile"
+            aria-label="User Profile"
+          >
+            <div class="user-avatar-circle" id="userAvatarText">UN</div>
+            <span
+              style="font-size: 0.8rem; font-weight: 600"
+              id="userProfileName"
+              >UNKNOWN</span
+            >
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main View Area -->
+    <main class="main-wrapper" id="mainContainer" role="main">
+      <!-- ======================================================================
+         VIEW 1: TODAY'S PERSONALIZED DASHBOARD (HOME)
+         ====================================================================== -->
+      <div class="view-panel active" id="view-dashboard">
+        <!-- Greeting Row -->
+        <div class="today-greeting-row">
+          <div>
+            <h1 class="today-greeting-title" id="todayGreetingHeading">
+              <span id="greetingTimeIcon">☀️</span>
+              <span id="greetingText">Good evening, UNKNOWN</span>
+            </h1>
+            <p class="today-greeting-sub">
+              Your personal learning briefing is calibrated. Complete today's
+              focus to solidify your streak.
+            </p>
+          </div>
+          <div class="today-date-badge">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+              <line x1="16" x2="16" y1="2" y2="6"></line>
+              <line x1="8" x2="8" y1="2" y2="6"></line>
+              <line x1="3" x2="21" y1="10" y2="10"></line>
+            </svg>
+            <span id="todayLiveDateText">Wednesday, Sep 30</span>
+          </div>
+        </div>
+
+        <!-- TODAY'S SPOTLIGHT RECOMMENDED TOPIC -->
+        <section
+          class="today-spotlight-card"
+          id="todaySpotlightCard"
+          aria-label="Today's Recommended Topic"
+        >
+          <div class="spotlight-left">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+              "
+            >
+              <span class="spotlight-badge">★ Today's Recommended Topic</span>
+              <span class="badge badge-indigo" id="spotlightCategoryBadge"
+                >AI & Engineering</span
+              >
+              <span class="badge" id="spotlightTimeBadge">~5 min read</span>
+              <span class="badge" id="spotlightDifficultyBadge"
+                >Intermediate</span
+              >
+            </div>
+            <h2
+              class="spotlight-title"
+              id="spotlightTitle"
+              style="
+                font-size: 1.45rem;
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                margin-bottom: 8px;
+              "
+            >
+              Why AI Agents Are Changing Software Development
+            </h2>
+            <p
+              class="spotlight-desc"
+              id="spotlightDesc"
+              style="
+                font-size: 0.92rem;
+                color: var(--text-muted);
+                line-height: 1.55;
+                max-width: 680px;
+                margin-bottom: 16px;
+              "
+            >
+              From simple code-completion to autonomous agentic loops: how LLMs
+              paired with reflection, tool calling, and deterministic test
+              harnesses are transforming software architecture.
+            </p>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex-wrap: wrap;
+              "
+            >
+              <button
+                class="primary-btn"
+                id="spotlightStartBtn"
+                style="padding: 9px 20px"
+              >
+                <span>Start Learning</span>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+              <button class="secondary-btn" id="spotlightSaveBtn">
+                <svg
+                  id="spotlightSaveIcon"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                  ></path>
+                </svg>
+                <span id="spotlightSaveText">Save</span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="spotlight-right"
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              background: var(--bg-card);
+              padding: 18px 24px;
+              border-radius: var(--radius-lg);
+              border: 1px solid var(--border-subtle);
+              text-align: center;
+            "
+          >
+            <span
+              style="
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                letter-spacing: 0.05em;
+              "
+              >Cognitive Gain</span
+            >
+            <span
+              style="
+                font-size: 1.5rem;
+                font-weight: 800;
+                color: var(--accent-primary);
+                font-family: var(--font-mono);
+                margin: 4px 0;
+              "
+              >+50 KP</span
+            >
+            <span
+              style="
+                font-size: 0.76rem;
+                color: var(--emerald);
+                font-weight: 600;
+              "
+              >Streak Extender</span
+            >
+          </div>
+        </section>
+
+        <!-- SECTION 1: Continue Learning -->
+        <section
+          class="continue-learning-card"
+          aria-label="Current Learning Course"
+        >
+          <div class="continue-left-content">
+            <div class="continue-meta-tags">
+              <span class="badge badge-indigo">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                In Progress
+              </span>
+              <span class="badge" id="continueCategoryBadge"
+                >AI & Machine Learning</span
+              >
+              <span class="time-est-badge">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                ~4 mins left
+              </span>
+            </div>
+            <h2 class="continue-title" id="continueTopicTitle">
+              Test-Time Compute & Chain-of-Thought Scaling
+            </h2>
+            <p class="continue-subtitle" id="continueTopicSubtitle">
+              Learn why frontier reasoning models allocate thinking tokens at
+              query time to explore multiple solution branches before generating
+              answers.
+            </p>
+            <div class="continue-progress-row">
+              <div class="progress-track-bg">
+                <div
+                  class="progress-bar-fill"
+                  id="continueProgressBar"
+                  style="width: 65%"
+                ></div>
+              </div>
+              <span class="progress-percent-label" id="continueProgressLabel"
+                >65% Complete</span
+              >
+            </div>
+          </div>
+          <div class="continue-right-action">
+            <button
+              class="primary-btn"
+              id="resumeLessonBtn"
+              style="padding: 10px 22px; font-size: 0.94rem"
+            >
+              <span>Resume Lesson</span>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <button
+              class="ghost-btn"
+              id="changeTopicQuickBtn"
+              style="font-size: 0.78rem"
+            >
+              Switch active topic
+            </button>
+          </div>
+        </section>
+
+        <!-- BENTO SPLIT: SECTION 2 (Today's 5-Min Discovery) & SECTION 3 (Quick Challenge) -->
+        <div class="bento-split-grid">
+          <!-- SECTION 2: Today's Discovery -->
+          <article class="discovery-card" aria-label="Today's Discovery">
+            <div>
+              <div class="discovery-header-row">
+                <div class="discovery-date-pill">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  Today's 5-Minute Knowledge
+                </div>
+                <span class="badge badge-amber" id="discoveryTag"
+                  >Core Mental Model</span
+                >
+              </div>
+
+              <h2 class="discovery-title" id="discoveryTitle">
+                The Lindy Effect & Architectural Durability
+              </h2>
+              <p class="discovery-summary" id="discoverySummary">
+                The Lindy Effect states that the future life expectancy of a
+                non-perishable technology or idea is proportional to its current
+                age. The longer it has survived, the longer it will continue to
+                survive.
+              </p>
+
+              <div class="discovery-key-insight-box">
+                <span class="insight-prefix">Architectural Rule:</span>
+                <span id="discoveryKeyInsight">
+                  In high-stakes software engineering, 80% of your stack should
+                  be built on Lindy-proven primitives (Unix, SQL, HTTP) that are
+                  10+ years old. Confine novelty to the experimental 20% edge.
+                </span>
+              </div>
+
+              <!-- Interactive Lindy Longevity Projector -->
+              <div class="discovery-interactive-widget">
+                <div class="widget-label">
+                  <span>Interactive Lindy Projector</span>
+                  <span id="lindyCurrentAge">Current Age: 30 Years</span>
+                </div>
+                <div class="lindy-slider-wrap">
+                  <input
+                    type="range"
+                    class="custom-range"
+                    id="lindySlider"
+                    min="1"
+                    max="100"
+                    value="30"
+                  />
+                  <div class="lindy-calc-result" id="lindyProjectedOutput">
+                    Expected Survival: ~30 more years
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="discovery-action-toolbar">
+              <div class="discovery-btn-group">
+                <button class="primary-btn" id="readDiscoveryModalBtn">
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                  </svg>
+                  <span>Read Full</span>
+                </button>
+                <button
+                  class="secondary-btn"
+                  id="saveDiscoveryBtn"
+                  title="Save to Notebook"
+                >
+                  <svg
+                    id="saveDiscoveryIcon"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                    ></path>
+                  </svg>
+                  <span id="saveDiscoveryText">Save</span>
+                </button>
+                <button
+                  class="secondary-btn"
+                  id="shareDiscoveryBtn"
+                  title="Share insight quote"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  <span>Share</span>
+                </button>
+              </div>
+              <button
+                class="ghost-btn"
+                id="markDiscoveryLearnedBtn"
+                style="color: var(--emerald)"
+              >
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Learned</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- SECTION 3: Quick Challenge -->
+          <article class="challenge-card" aria-label="Quick Challenge">
+            <div class="challenge-top-meta">
+              <span class="badge badge-emerald">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+                Daily Quick Challenge
+              </span>
+              <span class="badge badge-amber" id="challengeRewardBadge"
+                >+35 KP</span
+              >
+            </div>
+
+            <h3 class="challenge-h3" id="challengeTitle">
+              Distributed Caching Dilemma
+            </h3>
+            <p class="challenge-scenario-text" id="challengeScenario">
+              Your e-commerce service receives 50,000 req/sec during a flash
+              sale. The database is bottlenecked. Which caching approach
+              prevents a catastrophic cache stampede ("thundering herd")?
+            </p>
+
+            <div class="challenge-options-list" id="challengeOptionsContainer">
+              <!-- Populated via JavaScript for dynamic interactivity -->
+            </div>
+
+            <!-- Feedback drawer explaining WHY -->
+            <div class="challenge-feedback-panel" id="challengeFeedbackPanel">
+              <div class="feedback-status-title" id="feedbackStatusTitle">
+                <!-- Result Icon & Title -->
+              </div>
+              <p class="feedback-explanation" id="feedbackExplanationText">
+                <!-- Dynamic Explanation -->
+              </p>
+              <div class="feedback-why-matters" id="feedbackWhyMatters">
+                <!-- Real-world context -->
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- SECTION 4: Explore Topics Catalog -->
+        <section
+          class="explore-section-wrap"
+          aria-label="Explore Knowledge Disciplines"
+        >
+          <div class="section-meta-header">
+            <div class="section-title-wrap">
+              <span class="section-label">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon
+                    points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+                  ></polygon>
+                </svg>
+                Knowledge Catalog
+              </span>
+              <h2 class="section-h2">Explore Master Disciplines</h2>
+              <p class="section-subtext">
+                Concise, high-density modules designed for effortless 5-minute
+                mastery.
+              </p>
+            </div>
+            <button class="secondary-btn" id="viewAllExploreBtn">
+              <span>View All Topics</span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div
+            class="category-filter-bar"
+            id="categoryFilterBar"
+            role="tablist"
+          >
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Topics Grid -->
+          <div class="topics-grid" id="topicsGridContainer">
+            <!-- Topic Cards populated by JS -->
+          </div>
+        </section>
+
+        <!-- SECTION 5: Recommended For You -->
+        <section
+          class="recommendations-wrapper"
+          aria-label="Personalized Recommendations"
+        >
+          <div class="section-meta-header">
+            <div class="section-title-wrap">
+              <span class="section-label">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  ></polygon>
+                </svg>
+                Personalized Engine
+              </span>
+              <h2 class="section-h2">Recommended For Your Growth</h2>
+              <p class="section-subtext">
+                Tailored to your active interests, recent challenges, and
+                mastery velocity.
+              </p>
+            </div>
+            <button class="ghost-btn" id="tuneInterestsBtn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                ></path>
+              </svg>
+              <span>Tune Interests</span>
+            </button>
+          </div>
+
+          <div class="recs-grid" id="recommendationsGrid">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- SECTION 6: Today's Progress & Retention Momentum -->
+        <section
+          class="progress-retention-wrap"
+          aria-label="Progress and Momentum"
+        >
+          <div class="section-meta-header">
+            <div class="section-title-wrap">
+              <span class="section-label">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                Retention Momentum
+              </span>
+              <h2 class="section-h2">Your Continuous Trajectory</h2>
+              <p class="section-subtext">
+                Measurable progress towards multidisciplinary mastery.
+              </p>
+            </div>
+            <button class="primary-btn" id="openWeeklySummaryBtn">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
+                <line x1="16" x2="16" y1="2" y2="6"></line>
+                <line x1="8" x2="8" y1="2" y2="6"></line>
+                <line x1="3" x2="21" y1="10" y2="10"></line>
+              </svg>
+              <span>Weekly Summary</span>
+            </button>
+          </div>
+
+          <div class="progress-retention-grid">
+            <!-- Card A: Learning Streak & Habit Calendar -->
+            <div class="metric-stat-card">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div>
+                  <span class="badge badge-amber">Habit Loop</span>
+                  <h3
+                    style="
+                      font-size: 1.18rem;
+                      font-weight: 700;
+                      margin-top: 8px;
+                    "
+                  >
+                    Active Learning Streak
+                  </h3>
+                </div>
+                <div style="text-align: right">
+                  <span
+                    style="
+                      font-size: 2.1rem;
+                      font-weight: 800;
+                      color: #ea580c;
+                      font-family: var(--font-mono);
+                    "
+                    id="streakDaysCount"
+                    >5</span
+                  >
+                  <span
+                    style="
+                      font-size: 0.85rem;
+                      color: var(--text-muted);
+                      font-weight: 600;
+                    "
+                    >Days</span
+                  >
+                </div>
+              </div>
+
+              <!-- 7-Day Visual Streak Nodes -->
+              <div class="streak-calendar-row" id="streakNodesContainer">
+                <!-- Populated by JS -->
+              </div>
+              <div
+                style="
+                  margin-top: 14px;
+                  font-size: 0.8rem;
+                  color: var(--text-muted);
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                "
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span
+                  >Streak Freeze Active: Next session due tomorrow before
+                  midnight.</span
+                >
+              </div>
+            </div>
+
+            <!-- Card B: Weekly Activity Distribution -->
+            <div class="metric-stat-card">
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div>
+                  <span class="badge badge-indigo">Time Invested</span>
+                  <h3
+                    style="
+                      font-size: 1.18rem;
+                      font-weight: 700;
+                      margin-top: 8px;
+                    "
+                  >
+                    Weekly Activity Rhythm
+                  </h3>
+                </div>
+                <div style="text-align: right">
+                  <span
+                    style="
+                      font-size: 1.6rem;
+                      font-weight: 700;
+                      color: var(--text-main);
+                      font-family: var(--font-mono);
+                    "
+                    id="weeklyTotalMinutes"
+                    >129</span
+                  >
+                  <span style="font-size: 0.85rem; color: var(--text-muted)"
+                    >Mins</span
+                  >
+                </div>
+              </div>
+
+              <div class="weekly-activity-chart" id="weeklyActivityChart">
+                <!-- Dynamically populated bars -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievements Showcase -->
+          <div style="margin-top: 24px">
+            <h3
+              style="font-size: 1.1rem; font-weight: 700; margin-bottom: 14px"
+            >
+              Mastery Milestones
+            </h3>
+            <div class="achievements-grid" id="achievementsGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 2: FULL EXPLORE VIEW (DISCOVERY ENGINE)
+         ====================================================================== -->
+      <div class="view-panel" id="view-explore">
+        <div class="section-meta-header">
+          <div class="section-title-wrap">
+            <span class="section-label">Knowledge Catalog</span>
+            <h2 class="section-h2">Universal Discovery Engine</h2>
+            <p class="section-subtext">
+              Browse foundational topics across AI, systems, design, science,
+              and high performance.
+            </p>
+          </div>
+        </div>
+
+        <!-- Controls Panel with Search, Categories, Difficulty, and Duration Filters -->
+        <div class="explore-controls-panel">
+          <div class="explore-filter-row">
+            <input
+              type="text"
+              class="explore-search-input"
+              id="exploreSearchInput"
+              placeholder="Search topics, concepts, tags..."
+            />
+            <div class="filter-group-wrap" id="exploreDifficultyFilters">
+              <span class="filter-group-label">Difficulty:</span>
+              <button class="filter-pill-btn active" data-difficulty="all">
+                All
+              </button>
+              <button class="filter-pill-btn" data-difficulty="Beginner">
+                Beginner
+              </button>
+              <button class="filter-pill-btn" data-difficulty="Intermediate">
+                Intermediate
+              </button>
+              <button class="filter-pill-btn" data-difficulty="Advanced">
+                Advanced
+              </button>
+            </div>
+            <div class="filter-group-wrap" id="exploreDurationFilters">
+              <span class="filter-group-label">Duration:</span>
+              <button class="filter-pill-btn active" data-duration="all">
+                All
+              </button>
+              <button class="filter-pill-btn" data-duration="5">~5 min</button>
+              <button class="filter-pill-btn" data-duration="10">
+                ~10 min
+              </button>
+              <button class="filter-pill-btn" data-duration="20">
+                20+ min
+              </button>
+            </div>
+          </div>
+          <div
+            class="category-filter-bar"
+            id="explorePageFilterBar"
+            style="margin-bottom: 0"
+          ></div>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+          "
+        >
+          <span
+            style="
+              font-size: 0.85rem;
+              color: var(--text-muted);
+              font-weight: 500;
+            "
+            id="exploreResultsCount"
+            >Showing all topics</span
+          >
+        </div>
+
+        <div class="topics-grid" id="fullExploreGrid"></div>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 3: CHALLENGES ARENA (INTERACTIVE STEPS)
+         ====================================================================== -->
+      <div class="view-panel" id="view-challenges">
+        <div class="section-meta-header">
+          <div class="section-title-wrap">
+            <span class="section-label">Interactive Practice</span>
+            <h2 class="section-h2">The Synthesis Challenges Arena</h2>
+            <p class="section-subtext">
+              Multi-question tests, scenarios, true/false logic, and system
+              matchers with immediate rationale.
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <button class="secondary-btn active" id="tabScenarioChallengesBtn">
+              Challenge Quizzes
+            </button>
+            <button class="secondary-btn" id="tabConceptMatcherBtn">
+              Concept Matcher
+            </button>
+          </div>
+        </div>
+
+        <div id="challengesInteractiveContainer">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 4: TOOLKITS & RESOURCES
+         ====================================================================== -->
+      <div class="view-panel" id="view-resources">
+        <div class="section-meta-header">
+          <div class="section-title-wrap">
+            <span class="section-label">Practitioner Toolkits</span>
+            <h2 class="section-h2">Battle-Tested Cheatsheets & Frameworks</h2>
+            <p class="section-subtext">
+              High-leverage reference models designed for immediate copy-paste
+              and problem-solving.
+            </p>
+          </div>
+        </div>
+
+        <div class="topics-grid" id="resourcesGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 5: SAVED & NOTEBOOK
+         ====================================================================== -->
+      <div class="view-panel" id="view-saved">
+        <div class="section-meta-header">
+          <div class="section-title-wrap">
+            <span class="section-label">Personal Knowledge Vault</span>
+            <h2 class="section-h2">Saved Insights & Mastered Topics</h2>
+            <p class="section-subtext">
+              Your curated repository of high-value models, takeaways, and
+              bookmarks.
+            </p>
+          </div>
+          <button class="secondary-btn" id="exportNotebookBtn">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Export Notes (Markdown)</span>
+          </button>
+        </div>
+
+        <!-- Saved Tabs & Search Filter -->
+        <div class="saved-tabs-row">
+          <div style="display: flex; gap: 8px" id="savedTypeTabs">
+            <button class="saved-tab-btn active" data-saved-type="all">
+              All Saved (<span id="savedCountAll">0</span>)
+            </button>
+            <button class="saved-tab-btn" data-saved-type="topic">
+              Topics (<span id="savedCountTopics">0</span>)
+            </button>
+            <button class="saved-tab-btn" data-saved-type="challenge">
+              Challenges (<span id="savedCountChallenges">0</span>)
+            </button>
+            <button class="saved-tab-btn" data-saved-type="resource">
+              Toolkits (<span id="savedCountResources">0</span>)
+            </button>
+          </div>
+          <input
+            type="text"
+            class="explore-search-input"
+            id="savedSearchInput"
+            placeholder="Filter saved vault..."
+            style="margin-left: auto"
+          />
+        </div>
+
+        <div class="topics-grid" id="savedItemsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 6: DEDICATED DYNAMIC PROGRESS ANALYTICS
+         ====================================================================== -->
+      <div class="view-panel" id="view-progress">
+        <div class="section-meta-header">
+          <div class="section-title-wrap">
+            <span class="section-label">Analytics</span>
+            <h2 class="section-h2">Your Intellectual Trajectory</h2>
+            <p class="section-subtext">
+              Real-time metrics, discipline mastery breakdowns, and verified
+              activity history.
+            </p>
+          </div>
+          <button class="primary-btn" id="progressWeeklyDigestBtn">
+            <span>Weekly Digest</span>
+          </button>
+        </div>
+
+        <!-- Metrics Cards Grid -->
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+          "
+        >
+          <div class="metric-stat-card" style="padding: 20px">
+            <div
+              style="
+                font-size: 0.74rem;
+                font-weight: 700;
+                color: var(--accent-primary);
+                text-transform: uppercase;
+              "
+            >
+              Knowledge Points
+            </div>
+            <div
+              style="
+                font-size: 1.85rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                margin: 6px 0;
+              "
+              id="progKPCount"
+            >
+              540
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted)">
+              Points earned from active mastery
+            </div>
+          </div>
+          <div class="metric-stat-card" style="padding: 20px">
+            <div
+              style="
+                font-size: 0.74rem;
+                font-weight: 700;
+                color: #ea580c;
+                text-transform: uppercase;
+              "
+            >
+              Current Streak
+            </div>
+            <div
+              style="
+                font-size: 1.85rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: #ea580c;
+                margin: 6px 0;
+              "
+              id="progStreakCount"
+            >
+              5 Days
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted)">
+              Consecutive active days
+            </div>
+          </div>
+          <div class="metric-stat-card" style="padding: 20px">
+            <div
+              style="
+                font-size: 0.74rem;
+                font-weight: 700;
+                color: var(--emerald);
+                text-transform: uppercase;
+              "
+            >
+              Topics Mastered
+            </div>
+            <div
+              style="
+                font-size: 1.85rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: var(--emerald);
+                margin: 6px 0;
+              "
+              id="progTopicsCount"
+            >
+              3
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted)">
+              Concrete skills completed
+            </div>
+          </div>
+          <div class="metric-stat-card" style="padding: 20px">
+            <div
+              style="
+                font-size: 0.74rem;
+                font-weight: 700;
+                color: var(--sky);
+                text-transform: uppercase;
+              "
+            >
+              Challenges Solved
+            </div>
+            <div
+              style="
+                font-size: 1.85rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: var(--sky);
+                margin: 6px 0;
+              "
+              id="progChallengesCount"
+            >
+              1
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted)">
+              Scenario tests passed
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Mastery Progress Breakdown -->
+        <div class="metric-stat-card" style="margin-bottom: 28px">
+          <h3 style="font-size: 1.15rem; font-weight: 700">
+            Discipline Mastery Radar
+          </h3>
+          <p
+            style="
+              font-size: 0.84rem;
+              color: var(--text-muted);
+              margin-top: 2px;
+            "
+          >
+            Calculated dynamically from topics and challenges completed in each
+            domain.
+          </p>
+          <div class="category-mastery-list" id="categoryMasteryList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Completed Topics Ledger -->
+        <div class="metric-stat-card" style="margin-bottom: 28px">
+          <h3 style="font-size: 1.15rem; font-weight: 700">
+            Mastered Topics Ledger
+          </h3>
+          <p
+            style="
+              font-size: 0.84rem;
+              color: var(--text-muted);
+              margin-top: 2px;
+            "
+          >
+            Your verified record of completed concepts with one-click takeaway
+            reviews.
+          </p>
+          <div
+            id="completedTopicsLedger"
+            style="
+              margin-top: 16px;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+            "
+          >
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Achievements Showcase -->
+        <div class="metric-stat-card">
+          <h3 style="font-size: 1.15rem; font-weight: 700">
+            Milestones & Achievements
+          </h3>
+          <div
+            class="achievements-grid"
+            id="fullAchievementsGrid"
+            style="margin-top: 16px"
+          ></div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+         VIEW 7: USER PROFILE & INTERESTS
+         ====================================================================== -->
+      <div class="view-panel" id="view-profile">
+        <div class="metric-stat-card" style="margin-bottom: 28px">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 20px;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 18px">
+              <div
+                style="
+                  width: 68px;
+                  height: 68px;
+                  border-radius: 50%;
+                  background: linear-gradient(135deg, #4f46e5, #9333ea);
+                  color: #fff;
+                  font-size: 1.6rem;
+                  font-weight: 700;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+                "
+              >
+                AV
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px">
+                  <h2 style="font-size: 1.45rem; font-weight: 700">UNKNOWN</h2>
+                  <span class="badge badge-indigo">Level 4</span>
+                </div>
+                <p
+                  style="
+                    font-size: 0.88rem;
+                    color: var(--text-muted);
+                    margin-top: 2px;
+                  "
+                >
+                  Systems Polymath & Cognitive Architect
+                </p>
+              </div>
+            </div>
+            <button class="secondary-btn" id="profileExportBtn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Second Brain</span>
+            </button>
+          </div>
+
+          <!-- Customizable Interests Section -->
+          <div
+            style="
+              margin-top: 32px;
+              padding-top: 24px;
+              border-top: 1px solid var(--border-subtle);
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 12px;
+              "
+            >
+              <div>
+                <h4 style="font-size: 1rem; font-weight: 700">
+                  Focus Interests & Recommendations Engine
+                </h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted)">
+                  Toggle your target fields. Recommendations update in real-time
+                  across the app.
+                </p>
+              </div>
+            </div>
+            <div
+              style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px"
+              id="profileInterestsList"
+            >
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Preferences & Reset options -->
+          <div
+            style="
+              margin-top: 28px;
+              padding-top: 20px;
+              border-top: 1px solid var(--border-subtle);
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              gap: 12px;
+            "
+          >
+            <div style="font-size: 0.82rem; color: var(--text-muted)">
+              Data is persisted in browser local storage. Refreshing will never
+              clear your progress.
+            </div>
+            <button
+              class="ghost-btn"
+              id="resetDemoProgressBtn"
+              style="color: var(--rose); font-size: 0.78rem"
+            >
+              Reset Test Progress
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ======================================================================
+       MODAL 1: IMMERSIVE TOPIC READER (LEARNING EXPERIENCE)
+       ====================================================================== -->
+    <div
+      class="reader-modal-overlay"
+      id="topicReaderModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTopicTitle"
+    >
+      <div class="reader-container">
+        <!-- Reading Progress Bar -->
+        <div class="reader-reading-progress">
+          <div class="reader-progress-fill" id="readerProgressFill"></div>
+        </div>
+
+        <div class="reader-header">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span class="badge badge-indigo" id="modalCategoryBadge"
+              >Discipline</span
+            >
+            <span class="badge" id="modalDurationBadge">5 min read</span>
+            <span class="badge" id="modalDifficultyBadge">Intermediate</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <button
+              class="icon-btn"
+              id="modalSpeechBtn"
+              title="Listen to Narration (Text-to-Speech)"
+              aria-label="Listen to Narration"
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path
+                  d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="icon-btn"
+              id="modalBookmarkBtn"
+              title="Bookmark topic"
+              aria-label="Bookmark"
+            >
+              <svg
+                id="modalBookmarkIcon"
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="icon-btn"
+              id="closeReaderModalBtn"
+              title="Close reader (Esc)"
+              aria-label="Close"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="reader-scrollable-body" id="readerBodyContent">
+          <!-- Populated dynamically by openTopicReader(id) -->
+        </div>
+
+        <div class="reader-footer" style="flex-wrap: wrap; gap: 10px">
+          <div style="display: flex; align-items: center; gap: 8px">
+            <button class="secondary-btn" id="modalTakeChallengeBtn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+              <span>Take Challenge</span>
+            </button>
+            <button class="secondary-btn" id="modalExploreRelatedBtn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon
+                  points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+                ></polygon>
+              </svg>
+              <span>Related Topics</span>
+            </button>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              margin-left: auto;
+            "
+          >
+            <button class="secondary-btn" id="modalSaveFooterBtn">
+              <svg
+                id="modalSaveFooterIcon"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"
+                ></path>
+              </svg>
+              <span id="modalSaveFooterText">Save</span>
+            </button>
+            <button
+              class="primary-btn"
+              id="modalCompleteTopicBtn"
+              style="padding: 9px 20px"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Mark as Learned (+50 KP)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+       MODAL 2: GLOBAL SEARCH (⌘K / Ctrl+K)
+       ====================================================================== -->
+    <div
+      class="search-modal-overlay"
+      id="globalSearchModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="globalSearchInput"
+    >
+      <div class="search-container">
+        <div class="search-input-wrap">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            class="search-main-input"
+            id="globalSearchInput"
+            placeholder="Search topics, challenges, resources..."
+            autocomplete="off"
+          />
+          <kbd class="search-shortcut-key">ESC</kbd>
+        </div>
+
+        <!-- Recent Searches Bar -->
+        <div class="recent-searches-row" id="recentSearchesRow">
+          <span style="font-weight: 600">Recent:</span>
+          <!-- Dynamically rendered -->
+        </div>
+
+        <div class="search-results-list" id="searchResultsContainer">
+          <!-- Dynamically populated results -->
+        </div>
+
+        <div class="search-footer-bar">
+          <span
+            >Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate, <kbd>↵</kbd> to
+            select</span
+          >
+          <span>Instant Synthesis Search</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+       MODAL 3: WEEKLY SUMMARY DIGEST
+       ====================================================================== -->
+    <div
+      class="reader-modal-overlay"
+      id="weeklySummaryModal"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="weekly-digest-card">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span class="badge badge-indigo">Weekly Executive Digest</span>
+            <span style="font-size: 0.78rem; color: var(--text-muted)"
+              >Past 7 Days</span
+            >
+          </div>
+          <button class="icon-btn" id="closeWeeklySummaryBtn">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <h2
+          style="
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+          "
+        >
+          What You Learned This Week
+        </h2>
+        <p
+          style="
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            margin-bottom: 24px;
+          "
+          id="weeklySummaryIntro"
+        >
+          You maintained a 5-day active cadence and invested 129 productive
+          minutes into cognitive models and distributed systems.
+        </p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+          "
+        >
+          <div
+            style="
+              background: var(--bg-subtle);
+              padding: 14px;
+              border-radius: var(--radius-md);
+              border: 1px solid var(--border-subtle);
+            "
+          >
+            <div
+              style="
+                font-size: 1.5rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: var(--accent-primary);
+              "
+              id="weeklyTopicsCount"
+            >
+              3
+            </div>
+            <div
+              style="
+                font-size: 0.74rem;
+                color: var(--text-muted);
+                font-weight: 600;
+              "
+            >
+              Topics Mastered
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--bg-subtle);
+              padding: 14px;
+              border-radius: var(--radius-md);
+              border: 1px solid var(--border-subtle);
+            "
+          >
+            <div
+              style="
+                font-size: 1.5rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: var(--emerald);
+              "
+              id="weeklyChallengeAccuracy"
+            >
+              100%
+            </div>
+            <div
+              style="
+                font-size: 0.74rem;
+                color: var(--text-muted);
+                font-weight: 600;
+              "
+            >
+              Challenge Accuracy
+            </div>
+          </div>
+          <div
+            style="
+              background: var(--bg-subtle);
+              padding: 14px;
+              border-radius: var(--radius-md);
+              border: 1px solid var(--border-subtle);
+            "
+          >
+            <div
+              style="
+                font-size: 1.5rem;
+                font-weight: 800;
+                font-family: var(--font-mono);
+                color: #ea580c;
+              "
+              id="weeklyPointsAccumulated"
+            >
+              +240
+            </div>
+            <div
+              style="
+                font-size: 0.74rem;
+                color: var(--text-muted);
+                font-weight: 600;
+              "
+            >
+              KP Accumulated
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            background: var(--accent-light);
+            border: 1px solid var(--accent-light-border);
+            border-radius: var(--radius-lg);
+            padding: 18px;
+            margin-bottom: 24px;
+          "
+        >
+          <h4
+            style="
+              font-size: 0.86rem;
+              font-weight: 700;
+              color: var(--accent-primary);
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+              margin-bottom: 6px;
+            "
+          >
+            Next Recommended Frontier
+          </h4>
+          <p
+            style="
+              font-size: 0.88rem;
+              color: var(--text-main);
+              line-height: 1.5;
+            "
+            id="weeklyRecommendedTopicText"
+          >
+            <strong>Why AI Agents Are Changing Software Development</strong> —
+            Complements your recent work on distributed systems.
+          </p>
+        </div>
+
+        <button
+          class="primary-btn"
+          id="shareWeeklyDigestBtn"
+          style="width: 100%"
+        >
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span>Copy Weekly Achievement Card</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <div
+      class="mobile-bottom-bar"
+      role="navigation"
+      aria-label="Mobile Navigation"
+    >
+      <button class="mobile-nav-btn active" data-view="dashboard">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        </svg>
+        <span>Today</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="explore">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon
+            points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+          ></polygon>
+        </svg>
+        <span>Explore</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="challenges">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polygon
+            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+          ></polygon>
+        </svg>
+        <span>Practice</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="saved">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+        </svg>
+        <span>Saved</span>
+      </button>
+      <button class="mobile-nav-btn" data-view="progress">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line x1="12" x2="12" y1="20" y2="10"></line>
+          <line x1="18" x2="18" y1="20" y2="4"></line>
+          <line x1="6" x2="6" y1="20" y2="16"></line>
+        </svg>
+        <span>Progress</span>
+      </button>
+    </div>
+
+    <!-- Toast Notification Hub -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Application Logic -->
+    <script src="app.js"></script>
+  </body>
+</html>
